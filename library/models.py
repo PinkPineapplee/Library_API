@@ -11,3 +11,13 @@ class Book(models.Model):
 def __str__(self):
     return f"{self.title} by {self.author}"
     
+
+class User(models.Model):
+    ID = models.primarykey
+    Username = models.CharField(max_length= 255)
+    Email = models.CharField(max_length= 255)  
+    Date_of_Membership = models.DateField()
+    Active_Status = models.BooleanField()  
+
+def __str__(self):
+    return f"{self.Username}"  
