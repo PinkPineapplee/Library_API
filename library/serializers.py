@@ -4,11 +4,11 @@ from .models import Book, User
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = ['id', 'title', 'author', 'isbn', 'published_date', 'copies_available']
+        fields = "__all__"
 
-
-class UserSerializer(serializers.ModelSerializer):
+class TransactionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'Username', 'Email','Date_of_Membership', 'Active_Status']
+        fields = "__all__"
+        read_only_fields = ['checked_out_at','returned_at']
