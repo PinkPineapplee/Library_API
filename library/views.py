@@ -10,9 +10,41 @@ from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from django.utils import timesone
+from django.utils import timeszone
 from .models import Book, Transaction
 
+
+
+class BookListView(generics.ListAPIView):
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        queryset = Book.objects.all()
+
+        # Optional query params
+        available = self.request.query_params.get("available")
+        title = self.request.query_params.get("title")
+        author = self.request.query_params.get("author")
+        isbn = self.request.query_params.get("isbn")
+
+        # Filter by availability
+        if available == "true":
+            queryset = queryset.filter(copies_available__gt=0)
+
+
+             # Search filters
+        if title:
+            queryset = queryset.filter(title__icontains=title)
+
+        if author:
+            queryset = queryset.filter(author__icontains=author)
+
+        if isbn:
+            queryset = queryset.filter(isbn__icontains=isbn)
+
+        return queryset
+    
+    
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
