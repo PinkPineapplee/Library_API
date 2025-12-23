@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import (BookListView, UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView, CheckoutBookAPIView, ReturnBookAPIView, BookInventoryCreateAPIView, BookShowUpdateDestroyAPIView)
+from .views import (BookListView, BookListAPIView, UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView, CheckoutBookAPIView, ReturnBookAPIView, BookInventoryCreateAPIView, BookShowUpdateDestroyAPIView)
 
 from . import views
 
@@ -13,4 +13,5 @@ urlpatterns = [
     path('books/<int:book_id>/return/', ReturnBookAPIView.as_view()),
     path('library/', include('library.urls')),
     path("books/", BookListView.as_view(), name="book-list"),
+    path('books/', BookListAPIView.as_view(), name='book-list'),
 ]

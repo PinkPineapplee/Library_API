@@ -130,3 +130,25 @@ class ReturnBookAPIView(APIView):
 
         return Response({"message": "Book returned successfully"}, status=200)
                   
+class BookListAPIView(generics.ListAPIView):
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        queryset = Book.objects.all()
+
+        # filter by availability
+        available = self.request.query_params.get('available')
+        if available == 'true':
+            queryset = queryset.filter(copies_available__gt=0)
+
+        # search query
+        search = self.request.query_params.get('search')
+        if search:
+            queryset = queryset.filter(
+                Q(title__icontains=search) |
+                Q(author__icontains=search) |
+                Q(isbn__icontains=search)
+            )
+
+        return queryset
+
