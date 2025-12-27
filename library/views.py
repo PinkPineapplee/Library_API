@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
 from .models import Book, Transaction
 from .serializers import BookSerializer, TransactionSerializer
 from django.contrib.auth.models import User
 from rest_framework import generics
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +15,9 @@ from .models import Book, Transaction
 
 
 
+
+def index(request):
+    return JsonResponse({"message": "Welcome to the Library API"})
 class BookListView(generics.ListAPIView):
     serializer_class = BookSerializer
 
