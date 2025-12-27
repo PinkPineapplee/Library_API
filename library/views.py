@@ -52,12 +52,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 # List all books / create new book
-class BookInventoryCreateAPIView(generics.ListCreateAPIView):
+class BookListCreateAPIView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
-    serializer = BookSerializer
+    serializer_class = BookSerializer
 
 # Get / Update/ Delete a single book
-class BookShowUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+class BookRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
@@ -75,6 +75,9 @@ class UserRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class CheckoutBookAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+
     def post(self, request, book_id):
         user = request.user
 
@@ -108,6 +111,9 @@ class CheckoutBookAPIView(APIView):
 
 
 class ReturnBookAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+
     def post(self, request, book_id):
         user = request.user
 
@@ -152,3 +158,9 @@ class BookListAPIView(generics.ListAPIView):
 
         return queryset
 
+class MyTransactionsAPIView(generics.ListAPIView):
+    serializer_class = TransactionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Transaction.objects.filter(user=self.request.user)

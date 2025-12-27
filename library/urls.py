@@ -1,17 +1,21 @@
-from django.urls import path, include
-from .views import (BookListView, BookListAPIView, UserListCreateAPIView, UserRetrieveUpdateDestroyAPIView, CheckoutBookAPIView, ReturnBookAPIView, BookInventoryCreateAPIView, BookShowUpdateDestroyAPIView)
+from django.urls import path
+from .views import (
+    BookListCreateAPIView,
+    UserListCreateAPIView,
+    UserRetrieveUpdateDestroyAPIView,
+    CheckoutBookAPIView,
+    ReturnBookAPIView,
+    BookListCreateAPIView,
+    BookRetrieveUpdateDestroyAPIView,
+    MyTransactionsAPIView)
 
-from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("books/", BookInventoryCreateAPIView.as_view(), name="book-list-create"),
-    path("books/<int:pk>/", BookShowUpdateDestroyAPIView.as_view(), name= "book-detail"),
-    path('users/', UserListCreateAPIView.as_view()),
-    path('users/<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view()),
-    path('books/<int:book_id>/checkout/', CheckoutBookAPIView.as_view()),
-    path('books/<int:book_id>/return/', ReturnBookAPIView.as_view()),
-    path('library/', include('library.urls')),
-    path("books/", BookListView.as_view(), name="book-list"),
-    path('books/', BookListAPIView.as_view(), name='book-list'),
+    path("books/", BookListCreateAPIView.as_view(), name="book-list-create"),
+    path("books/<int:pk>/", BookRetrieveUpdateDestroyAPIView.as_view(), name= "book-detail"),
+    path('users/', UserListCreateAPIView.as_view(),  name="user-list"),
+    path('users/<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view(),  name="user-detail"),
+    path('books/<int:book_id>/checkout/', CheckoutBookAPIView.as_view(), name="checkout-book"),
+    path('books/<int:book_id>/return/', ReturnBookAPIView.as_view(), name="return-book"),
+    path("my-transactions/", MyTransactionsAPIView.as_view.as_view(), name="my-transactions"),
 ]
