@@ -54,3 +54,9 @@ User Roles: Add different user roles such as Admin (who can manage books and use
 Overdue Tracking: Add functionality to track overdue books and implement a penalty system for late returns.
 Pagination and Filters: Add pagination to the book list and implement more advanced filtering options.
 Notifications: Implement an email notification system that alerts users when a book is overdue or when a previously unavailable book becomes available.     
+
+### Librarian Chatbot
+POST /library/chat/
+
+Allows authenticated users to ask general library questions such as book availability,
+borrowing rules, and author searches.

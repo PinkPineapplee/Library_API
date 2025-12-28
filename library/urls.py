@@ -8,7 +8,8 @@ from .views import (
     ReturnBookAPIView,
     BookListCreateAPIView,
     BookRetrieveUpdateDestroyAPIView,
-    MyTransactionsAPIView)
+    MyTransactionsAPIView,
+    LibrarianChatAPIView)
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -25,5 +26,5 @@ urlpatterns = [
     path("my-transactions/", MyTransactionsAPIView.as_view(), name="my-transactions"),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-
+    path("chat/", LibrarianChatAPIView.as_view(), name="librarian-chat"),
 ]

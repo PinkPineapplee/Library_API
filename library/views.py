@@ -167,3 +167,68 @@ class MyTransactionsAPIView(generics.ListAPIView):
 
     def get_queryset(self):
         return Transaction.objects.filter(user=self.request.user)
+
+
+class LibrarianChatAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        message = request.data.get("message", "").lower().strip()
+        user = request.user
+
+        if not message:
+            return Response({
+                "reply": "Please type a question so I can help you."
+            }, status=400)
+
+        # 1. Borrowing instructions
+        if "borrow" in message or "checkout" in message:
+            return Response({
+                "reply": "To borrow a book, go to the book list and use the checkout endpoint for the book you want."
+            })
+
+        # 2. Returning instructions
+        if "return" in message:
+            return Response({
+                "reply": "To return a book, use the return endpoint for the book you borrowed."
+            })
+
+        # 3. Available books
+        if "available" in message:
+            count = Book.objects.filter(copies_available__gt=0).count()
+            return Response({
+                "reply": f"There are {count} books currently available."
+            })
+
+        # 4. Author search
+        if "author" in message:
+            words = message.split()
+            author_name = words[-1]
+
+            books = Book.objects.filter(author__icontains=author_name)
+            if books.exists():
+                titles = [book.title for book in books]
+                return Response({
+                    "reply": f"Books by {author_name}: {', '.join(titles)}"
+                })
+
+            return Response({
+                "reply": f"No books found by {author_name}."
+            })
+
+        # 5. Overdue warning
+        overdue = Transaction.objects.filter(
+            user=user,
+            returned_at__isnull=True,
+            due_date__lt=timezone.now()
+        ).exists()
+
+        if overdue:
+            return Response({
+                "reply": "You currently have overdue books. Please return them before borrowing new ones."
+            })
+
+        # Fallback response
+        return Response({
+            "reply": "I'm the librarian bot. I can help you find books, explain borrowing rules, or check availability."
+        })
