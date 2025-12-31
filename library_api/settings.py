@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-f-xo_0lau*spus1nd0e#y7fss+93ykuo&bbr=##s9xls_u&!t(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['vee.pythonanywhere.com']
+ALLOWED_HOSTS = ['vee.pythonanywhere.com',
+                 'localhost',
+                 '127.0.0.1',]
 
 
 # Application definition
