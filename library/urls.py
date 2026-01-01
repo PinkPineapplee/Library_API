@@ -13,9 +13,17 @@ from .views import (
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from django.http import JsonResponse
+
+def health(request):
+    return JsonResponse({"status": "ok"})
+
+
+   
 
 
 urlpatterns = [
+    path("health/", health),
     path("", views.index, name="index"),
     path("books/", BookListCreateAPIView.as_view(), name="books"),
     path("books/<int:pk>/", BookRetrieveUpdateDestroyAPIView.as_view(), name= "book-detail"),

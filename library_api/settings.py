@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-f-xo_0lau*spus1nd0e#y7fss+93ykuo&bbr=##s9xls_u&!t("
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['vee.pythonanywhere.com',
                  'localhost',
@@ -131,3 +131,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://vee.pythonanywhere.com",
+]

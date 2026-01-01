@@ -9,8 +9,8 @@ class Book(models.Model):
     published_date = models.DateField()
     copies_available = models.PositiveIntegerField(default = 1)
 
-def __str__(self):
-    return f"{self.title} by {self.author}"
+    def __str__(self):
+     return f"{self.title} by {self.author}"
     
 
 
