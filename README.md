@@ -2,10 +2,10 @@
 A simple library api
 
 
-can you paraphrase this.
-Capstone Project: Library Management System API
+
+Capstone Project: Library Management System API.
 Project Overview:
-As a backend developer, your goal is to design and implement a Library Management System API using Django and Django REST Framework. The API will serve as the backend for managing library resources, allowing users to interact with the system by borrowing, returning, and viewing books. You will be tasked with creating and deploying a fully functional API, simulating a real-world development environment, where backend logic, database management, and API design play crucial roles.
+As a backend developer, my goal is to design and implement a Library Management System API using Django and Django REST Framework. The API will serve as the backend for managing library resources, allowing users to interact with the system by borrowing, returning, and viewing books. I will be tasked with creating and deploying a fully functional API, simulating a real-world development environment, where backend logic, database management, and API design play crucial roles.
 
 Functional Requirements:
 Books Management (CRUD):
@@ -39,7 +39,7 @@ Authentication:
 
 Implement basic user authentication using Django’s built-in authentication system.
 Users should be able to log in and access their own borrowing history.
-Optionally, you can explore token-based authentication (JWT) for a more secure API experience.
+Optionally, I can explore token-based authentication (JWT) for a more secure API experience.
 API Design:
 
 Use Django Rest Framework (DRF) to create and expose the necessary API endpoints.
@@ -47,8 +47,8 @@ Follow RESTful principles: endpoints should be well-named and make use of approp
 Ensure proper error handling and return appropriate HTTP status codes.
 Deployment:
 
-Deploy your API on Heroku or PythonAnywhere.
-Ensure that your deployed API is accessible, functional, and secure.
+Deploy my API on Heroku or PythonAnywhere.
+Ensure that deployed API is accessible, functional, and secure.
 Stretch Goals (Optional):
 User Roles: Add different user roles such as Admin (who can manage books and users) and Member (who can check out and return books).
 Overdue Tracking: Add functionality to track overdue books and implement a penalty system for late returns.
@@ -60,3 +60,6 @@ POST /library/chat/
 
 Allows authenticated users to ask general library questions such as book availability,
 borrowing rules, and author searches.
+
+### Deployment
+Pythonanywhere :https://vee.pythonanywhere.com/
